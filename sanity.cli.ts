@@ -5,6 +5,9 @@ export default defineCliConfig({
     projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
     dataset: process.env.SANITY_STUDIO_DATASET!,
   },
+  server: {
+    port: 3334,
+  },
   deployment: {
     /**
      * Enable auto-updates for studios.
