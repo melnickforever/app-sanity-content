@@ -41,6 +41,7 @@ export const pageType = defineType({
       name: 'status',
       title: 'Enabled',
       type: 'boolean',
+      initialValue: false,
       description:
         'Toggle to enable or disable the page. Disabled pages will not be visible on the website.',
       group: 'details',
