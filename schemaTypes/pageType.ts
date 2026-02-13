@@ -106,8 +106,8 @@ export const pageType = defineType({
       pageId: 'pageId',
     },
     prepare({title, pageId}) {
-      const formatedTitle = title
-        ? title.substring(0, 10) + (title.length > 10 ? '...' : '')
+      const formatedTitle: string = title
+        ? title.substring(0, globalVariables.CMS_PAGE_REVIEW_TITLE_SIZE_LIMIT) + (title.length > globalVariables.CMS_PAGE_REVIEW_TITLE_SIZE_LIMIT ? '...' : '')
         : 'No title'
       return {
         title: `[${pageId}] ${formatedTitle}`,
