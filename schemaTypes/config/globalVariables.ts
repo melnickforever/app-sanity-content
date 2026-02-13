@@ -1,0 +1,5 @@
+const GLOBAL_SANITY_CLIENT_API_VERSION: string = '2024-06-01'
+
+export const globalVariables = {
+  SANITY_API_VERSION: GLOBAL_SANITY_CLIENT_API_VERSION,
+}

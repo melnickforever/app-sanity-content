@@ -1,7 +1,7 @@
-import {defineField, defineType} from 'sanity'
+import {defineField, defineType, ValidationContext} from 'sanity'
 import {DocumentIcon} from '@sanity/icons'
 import {seoFields} from './seo/seoConfig'
-
+import {globalVariables} from './config/globalVariables'
 
 export const pageType = defineType({
   name: 'page',
@@ -13,6 +13,30 @@ export const pageType = defineType({
     {name: 'seo', title: 'Search Engine Optimization'},
   ],
   fields: [
+    defineField({
+      name: 'pageId',
+      title: 'Page ID',
+      type: 'string',
+      description: 'Unique ID for the page. This is used for fetching content on the frontend.',
+      group: 'details',
+      validation: (Rule) =>
+        Rule.required().custom(async (pageId: string | undefined, context: ValidationContext) => {
+          if (!pageId) {
+            return true
+          }
+          const {document, getClient} = context
+          const client = getClient({apiVersion: globalVariables.SANITY_API_VERSION})
+          const id = document?._id.replace('drafts.', '')
+          const params = {
+            draft: `drafts.${id}`,
+            published: id,
+            pageId,
+          }
+          const query = `!defined(*[_type == "page" && !(_id in [$draft, $published]) && pageId == $pageId][0])`
+          const isUnique: boolean = await client.fetch(query, params)
+          return isUnique ? true : 'Page ID must be unique'
+        }),
+    }),
     defineField({
       name: 'status',
       title: 'Enabled',
@@ -44,9 +68,7 @@ export const pageType = defineType({
         if (!value) {
           return false
         }
-
         const isAdmin = currentUser?.roles.some((role) => role.name === 'administrator')
-
         // Only admins can change the slug
         return !isAdmin
       },
@@ -78,4 +100,19 @@ export const pageType = defineType({
     }),
     ...seoFields,
   ],
+  preview: {
+    select: {
+      title: 'title',
+      pageId: 'pageId',
+    },
+    prepare({title, pageId}) {
+      const formatedTitle = title
+        ? title.substring(0, 10) + (title.length > 10 ? '...' : '')
+        : 'No title'
+      return {
+        title: `[${pageId}] ${formatedTitle}`,
+        pageId: pageId,
+      }
+    },
+  },
 })
