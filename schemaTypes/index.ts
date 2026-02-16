@@ -1,2 +1,3 @@
 import {pageType} from './pageType'
-export const schemaTypes = [pageType]
+import {skillType} from './skillType'
+export const schemaTypes = [pageType, skillType]

@@ -17,4 +17,6 @@ export const structure: StructureResolver = (S) =>
         .title('Inactive')
         .schemaType('page')
         .child(S.documentList().title('Inactive CMS Pages').filter('status == false')),
+      S.divider().title('Portfolio'),
+      S.documentTypeListItem('skill').title('Skills'),
     ])
