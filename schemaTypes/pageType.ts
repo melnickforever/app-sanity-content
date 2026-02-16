@@ -38,7 +38,7 @@ export const pageType = defineType({
         }),
     }),
     defineField({
-      name: 'status',
+      name: 'enabled',
       title: 'Enabled',
       type: 'boolean',
       initialValue: false,

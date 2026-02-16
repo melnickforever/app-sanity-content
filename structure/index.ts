@@ -12,11 +12,11 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title('Active')
         .schemaType('page')
-        .child(S.documentList().title('Active CMS Pages').filter('status == true')),
+        .child(S.documentList().title('Active CMS Pages').filter('enabled == true')),
       S.listItem()
         .title('Inactive')
         .schemaType('page')
-        .child(S.documentList().title('Inactive CMS Pages').filter('status == false')),
+        .child(S.documentList().title('Inactive CMS Pages').filter('enabled == false')),
       S.divider().title('Portfolio'),
       S.documentTypeListItem('skill').title('Skills'),
     ])
