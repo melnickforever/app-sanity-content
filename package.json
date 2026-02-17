@@ -26,9 +26,8 @@
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^6.0.0",
-    "@types/react": "^19.2.13",
-    "@types/uuid": "^11.0.0",
-    "eslint": "^9.39.2",
+    "@types/react": "^19.2.14",
+    "eslint": "^10.0.0",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },
