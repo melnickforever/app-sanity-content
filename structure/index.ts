@@ -25,7 +25,7 @@ export const structure: StructureResolver = (S) =>
           S.documentList()
             .title('All CMS Pages')
             .filter('_type == "portfolio"')
-            .defaultOrdering([{field: 'sortOrder', direction: 'asc'}]),
+            .defaultOrdering([{field: 'sortOrder', direction: 'desc'}]),
         ),
       S.listItem()
         .title('Projects Enabled')
@@ -33,7 +33,7 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.documentList().title('Projects')
             .filter(' _type == "portfolio" && enabled == true')
-            .defaultOrdering([{field: 'sortOrder', direction: 'asc'}]),
+            .defaultOrdering([{field: 'sortOrder', direction: 'desc'}]),
         ),
       S.listItem()
         .title('Projects Disabled')
@@ -42,7 +42,7 @@ export const structure: StructureResolver = (S) =>
           S.documentList()
             .title('Projects')
             .filter(' _type == "portfolio" && enabled == false')
-            .defaultOrdering([{field: 'sortOrder', direction: 'asc'}]),
+            .defaultOrdering([{field: 'sortOrder', direction: 'desc'}]),
         ),
       S.documentTypeListItem('skill').title('Skills'),
     ])

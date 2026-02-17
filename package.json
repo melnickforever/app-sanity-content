@@ -15,6 +15,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@portabletext/types": "^4.0.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/ui": "^3.1.11",
     "@sanity/vision": "^5.9.0",
