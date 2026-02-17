@@ -1,6 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {ProjectsIcon} from '@sanity/icons'
 import {seoFields} from './seo/seoConfig'
+import {globalVariables} from './config/globalVariables'
 
 export const portfolioType = defineType({
   name: 'portfolio',
@@ -23,21 +24,21 @@ export const portfolioType = defineType({
       group: 'details',
     }),
     defineField({
-      name: 'title',
-      type: 'string',
-      description: 'The title of the portfolio item.',
-      validation: (rule) =>
-        rule.required().info('This field is required and will be used as the skill title'),
-    }),
-    defineField({
       name: 'sortOrder',
       type: 'number',
       description:
         'The sort order for the project. Projects will be displayed in ascending order based on this value.',
       options: {
-        list: Array.from({length: 150}, (_, i) => i + 1),
+        list: Array.from({length: globalVariables.PORTFOLIO_ITEM_MAX_WEIGHT}, (_, i) => i + 1),
       },
-      initialValue: 150,
+      initialValue: globalVariables.PORTFOLIO_ITEM_DEFAULT_WEIGHT,
+      validation: (rule) =>
+        rule.required().info('This field is required and will be used as the skill title'),
+    }),
+    defineField({
+      name: 'title',
+      type: 'string',
+      description: 'The title of the portfolio item.',
       validation: (rule) =>
         rule.required().info('This field is required and will be used as the skill title'),
     }),
