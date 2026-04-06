@@ -25,7 +25,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Sanity Studio
-        run: pnpm -C apps/studio build
+        run: pnpm build
 
       - name: Install Vercel CLI
         run: pnpm add -g vercel
