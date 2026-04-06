@@ -3,14 +3,32 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v25 # deploy
+      - uses: actions/checkout@v4
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          vercel-args: --prod # Optional
-          vercel-org-id: ${{ secrets.ORG_ID}} # Required
-          vercel-project-id: ${{ secrets.PROJECT_ID}} # Required
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.x
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '23.x'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to Vercel
+        uses: BetaHuhn/deploy-to-vercel-action@v1
+        with:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          PRODUCTION: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
