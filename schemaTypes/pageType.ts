@@ -10,6 +10,7 @@ export const pageType = defineType({
   icon: DocumentIcon,
   groups: [
     {name: 'details', title: 'Page Details'},
+    {name: 'aboutSections', title: 'About Page Sections'},
     {name: 'seo', title: 'Search Engine Optimization'},
   ],
   fields: [
@@ -98,6 +99,30 @@ export const pageType = defineType({
           ],
         },
       ],
+    }),
+    defineField({
+      name: 'qualifications',
+      title: 'Summary of qualifications',
+      type: 'array',
+      description: 'Short qualification statements. Used only on the About page (numbered list). Ignored on other pages.',
+      group: 'aboutSections',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'mentoring',
+      title: 'Mentoring',
+      type: 'array',
+      description: 'Mentoring and coaching areas. Used only on the About page (tags). Ignored on other pages.',
+      group: 'aboutSections',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'certifications',
+      title: 'Licenses & certifications',
+      type: 'array',
+      description: 'Courses, licenses and certifications. Used only on the About page (tags). Ignored on other pages.',
+      group: 'aboutSections',
+      of: [{type: 'string'}],
     }),
     ...seoFields,
   ],
